@@ -1,0 +1,1 @@
+import{j as r}from"./index-B0flRXvH.js";import{c as a}from"./createLucideIcon-Dceg-GJv.js";const o=[["path",{d:"M21 12a9 9 0 1 1-6.219-8.56",key:"13zald"}]],t=a("loader-circle",o);function n({className:e=""}){return r.jsx(t,{className:`h-6 w-6 animate-spin text-primary ${e}`})}export{n as S};

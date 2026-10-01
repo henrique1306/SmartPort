@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+argon2-cffi>=23.1.0
+passlib[argon2]
+python-jose[cryptography]
+python-multipart
+pika

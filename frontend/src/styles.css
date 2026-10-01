@@ -1,0 +1,140 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-glass: var(--glass);
+  --color-glass-border: var(--glass-border);
+}
+
+:root {
+  /* Pantone Color of the Year 2003 — Aqua Sky (#7BC4C4) */
+  --radius: 1rem;
+
+  --background: oklch(0.99 0.008 200);
+  --foreground: oklch(0.26 0.04 220);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.26 0.04 220);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.26 0.04 220);
+
+  --primary: oklch(0.74 0.07 197);
+  --primary-foreground: oklch(0.22 0.04 220);
+
+  --secondary: oklch(0.95 0.03 197);
+  --secondary-foreground: oklch(0.34 0.06 210);
+
+  --muted: oklch(0.96 0.015 200);
+  --muted-foreground: oklch(0.52 0.03 215);
+
+  --accent: oklch(0.9 0.06 197);
+  --accent-foreground: oklch(0.3 0.06 210);
+
+  --destructive: oklch(0.58 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --success: oklch(0.68 0.11 190);
+  --success-foreground: oklch(0.2 0.04 220);
+
+  --border: oklch(0.9 0.02 200 / 60%);
+  --input: oklch(0.95 0.02 200);
+  --ring: oklch(0.74 0.07 197);
+
+  --glass: oklch(1 0 0 / 55%);
+  --glass-border: oklch(1 0 0 / 70%);
+
+  --sidebar: oklch(0.99 0.008 200);
+  --sidebar-foreground: oklch(0.26 0.04 220);
+  --sidebar-primary: oklch(0.74 0.07 197);
+  --sidebar-primary-foreground: oklch(0.22 0.04 220);
+  --sidebar-accent: oklch(0.95 0.03 197);
+  --sidebar-accent-foreground: oklch(0.34 0.06 210);
+  --sidebar-border: oklch(0.9 0.02 200);
+  --sidebar-ring: oklch(0.74 0.07 197);
+  --chart-1: oklch(0.74 0.07 197);
+  --chart-2: oklch(0.66 0.1 210);
+  --chart-3: oklch(0.8 0.06 190);
+  --chart-4: oklch(0.56 0.08 220);
+  --chart-5: oklch(0.86 0.05 200);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html, body {
+    font-family: var(--font-sans);
+  }
+
+  body {
+    color: var(--color-foreground);
+    background:
+      radial-gradient(1200px 600px at 10% -10%, oklch(0.86 0.07 197 / 60%), transparent 60%),
+      radial-gradient(900px 500px at 110% 10%, oklch(0.9 0.06 210 / 55%), transparent 60%),
+      radial-gradient(800px 600px at 50% 120%, oklch(0.9 0.05 190 / 50%), transparent 60%),
+      var(--color-background);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+      0 8px 32px -8px oklch(0.45 0.06 210 / 18%),
+      inset 0 1px 0 0 oklch(1 0 0 / 60%);
+  }
+  .glass-strong {
+    background: oklch(1 0 0 / 75%);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid oklch(1 0 0 / 80%);
+    box-shadow:
+      0 20px 60px -20px oklch(0.45 0.06 210 / 25%),
+      inset 0 1px 0 0 oklch(1 0 0 / 70%);
+  }
+  .glass-green {
+    background: linear-gradient(135deg, oklch(0.86 0.08 197 / 45%), oklch(1 0 0 / 45%));
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid oklch(0.78 0.08 197 / 45%);
+    box-shadow: 0 10px 40px -10px oklch(0.6 0.08 197 / 35%);
+  }
+}

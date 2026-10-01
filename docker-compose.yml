@@ -1,0 +1,63 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq_hub
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    restart: always
+
+  service-dashboard:
+    container_name: ms_dashboard
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./frontend/.env
+    depends_on:
+      - service-camera
+      - service-arduino
+      - service-syncer
+    restart: always
+
+  service-camera:
+    container_name: ms_camera
+    build:
+      context: .
+      dockerfile: service-camera/Dockerfile
+    volumes:
+      - ./data_storage:/app/data
+    depends_on:
+      - rabbitmq
+    restart: always
+
+  service-arduino:
+    container_name: ms_arduino
+    build:
+      context: .
+      dockerfile: service-arduino/Dockerfile
+    volumes:
+      - ./data_storage:/app/data
+    # devices:
+    #   - /dev/ttyACM0:/dev/ttyACM0
+    depends_on:
+      - rabbitmq
+    restart: always
+
+  service-syncer:
+    container_name: ms_syncer
+    build:
+      context: .
+      dockerfile: service-syncer/Dockerfile
+    volumes:
+      - ./data_storage:/app/data
+    depends_on:
+      - rabbitmq
+    restart: on-failure
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
